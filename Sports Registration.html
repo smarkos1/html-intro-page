@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sports Event Registration</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color:#f4f6f8;
+    
+}
+
+.container {
+    max-width: 950px;
+    margin: 30px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(55, 0, 255, 0.1);
+    
+}
+
+h1 {
+    text-align: center;
+    color: #000000;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    border: 1px solid #757575;
+    padding: 10px;
+}
+
+th {
+    background-color: #daedfa;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 12px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+input[type="submit"], input[type="reset"] {
+    width: auto;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+input[type="submit"] {
+    background-color: #0b6aa2;
+    color: white;
+}
+
+input[type="reset"] {
+    background-color: gray;
+    color: white;
+}
+
+.msg {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 6px;
+    display: none;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+.success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+</style>
+
+<script>
+function validateForm(event) {
+    event.preventDefault();
+
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let confirm = document.getElementById("confirm").value;
+    let age = document.getElementById("age").value;
+    let message = document.getElementById("message");
+
+    message.style.display = "block";
+
+    if (name === "" || email === "") {
+        message.className = "msg error";
+        message.innerHTML = "Name and Email are required.";
+        return false;
+    }
+
+    if (password !== confirm) {
+        message.className = "msg error";
+        message.innerHTML = "Passwords do not match.";
+        return false;
+    }
+
+    if (age < 16 || age > 80) {
+        message.className = "msg error";
+        message.innerHTML = "Age must be between 16 and 80.";
+        return false;
+    }
+
+    message.className = "msg success";
+    message.innerHTML = "Registration submitted successfully!";
+    return true;
+}
+</script>
+
+</head>
+
+<body>
+<div class="container">
+
+<h1>Sports Event Registration Page</h1>
+
+<h2>Upcoming Events</h2>
+<table>
+<tr>
+    <th>Event</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Location</th>
+</tr>
+<tr>
+    <td>Soccer</td>
+    <td>2026-03-10</td>
+    <td>08:00</td>
+    <td>Stadium A</td>
+</tr>
+<tr>
+    <td>Basketball</td>
+    <td>2026-03-12</td>
+    <td>10:00</td>
+    <td>Arena B</td>
+</tr>
+<tr>
+    <td>Swimming</td>
+    <td>2026-03-15</td>
+    <td>09:00</td>
+    <td>Pool C</td>
+</tr>
+<tr>
+    <td>Tennis</td>
+    <td>2026-03-18</td>
+    <td>07:30</td>
+    <td>Court D</td>
+</tr>
+</table>
+
+<h2>Register for an Event</h2>
+
+<form method="post" onsubmit="validateForm(event)">
+
+<label>Full Name (required)</label>
+<input type="text" id="name" required>
+
+<label>Email (required)</label>
+<input type="email" id="email" required>
+
+<label>Password</label>
+<input type="password" id="password">
+
+<label>Confirm Password</label>
+<input type="password" id="confirm">
+
+<label>Age (16–80)</label>
+<input type="number" id="age" min="16" max="80">
+
+<label>Country</label>
+<select>
+<option>USA</option>
+<option>Canada</option>
+<option>UK</option>
+<option>Australia</option>
+<option>Germany</option>
+</select>
+
+<label>Event Date</label>
+<input type="date">
+
+<label>Arrival Time</label>
+<input type="time">
+
+<label>Ticket Type</label>
+<input type="radio" name="ticket"> Standard
+<input type="radio" name="ticket"> VIP
+<input type="radio" name="ticket"> Student
+
+<label>Extra Options</label>
+<input type="checkbox"> Parking
+<input type="checkbox"> Meal
+<input type="checkbox"> Merchandise
+
+<div class="buttons">
+<input type="submit" value="Submit">
+<input type="reset" value="Reset">
+</div>
+
+<div id="message" class="msg"></div>
+
+</form>
+
+</div>
+</body>
+</html>
